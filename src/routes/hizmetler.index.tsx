@@ -10,7 +10,7 @@ const title = "Hizmetler ve Fiyatlar | Hazel Ağaoğlu Nail Art Studio";
 const description =
   "Manikür, kalıcı oje, protez tırnak, dolgu ve nail art hizmetleri. Süre ve fiyat bilgisiyle birlikte online randevu.";
 
-export const Route = createFileRoute("/hizmetler")({
+export const Route = createFileRoute("/hizmetler/")({
   head: () => ({
     meta: [
       { title },
