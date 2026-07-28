@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SssRouteImport } from './routes/sss'
+import { Route as RandevuVeIptalKosullariRouteImport } from './routes/randevu-ve-iptal-kosullari'
 import { Route as RandevuRouteImport } from './routes/randevu'
 import { Route as KullanimKosullariRouteImport } from './routes/kullanim-kosullari'
 import { Route as IletisimRouteImport } from './routes/iletisim'
@@ -24,6 +25,11 @@ import { Route as HizmetlerSlugRouteImport } from './routes/hizmetler.$slug'
 const SssRoute = SssRouteImport.update({
   id: '/sss',
   path: '/sss',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RandevuVeIptalKosullariRoute = RandevuVeIptalKosullariRouteImport.update({
+  id: '/randevu-ve-iptal-kosullari',
+  path: '/randevu-ve-iptal-kosullari',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RandevuRoute = RandevuRouteImport.update({
@@ -86,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/iletisim': typeof IletisimRoute
   '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/randevu': typeof RandevuRoute
+  '/randevu-ve-iptal-kosullari': typeof RandevuVeIptalKosullariRoute
   '/sss': typeof SssRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/hizmetler/': typeof HizmetlerIndexRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/iletisim': typeof IletisimRoute
   '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/randevu': typeof RandevuRoute
+  '/randevu-ve-iptal-kosullari': typeof RandevuVeIptalKosullariRoute
   '/sss': typeof SssRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/hizmetler': typeof HizmetlerIndexRoute
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/iletisim': typeof IletisimRoute
   '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/randevu': typeof RandevuRoute
+  '/randevu-ve-iptal-kosullari': typeof RandevuVeIptalKosullariRoute
   '/sss': typeof SssRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/hizmetler/': typeof HizmetlerIndexRoute
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/iletisim'
     | '/kullanim-kosullari'
     | '/randevu'
+    | '/randevu-ve-iptal-kosullari'
     | '/sss'
     | '/hizmetler/$slug'
     | '/hizmetler/'
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
     | '/iletisim'
     | '/kullanim-kosullari'
     | '/randevu'
+    | '/randevu-ve-iptal-kosullari'
     | '/sss'
     | '/hizmetler/$slug'
     | '/hizmetler'
@@ -154,6 +165,7 @@ export interface FileRouteTypes {
     | '/iletisim'
     | '/kullanim-kosullari'
     | '/randevu'
+    | '/randevu-ve-iptal-kosullari'
     | '/sss'
     | '/hizmetler/$slug'
     | '/hizmetler/'
@@ -168,6 +180,7 @@ export interface RootRouteChildren {
   IletisimRoute: typeof IletisimRoute
   KullanimKosullariRoute: typeof KullanimKosullariRoute
   RandevuRoute: typeof RandevuRoute
+  RandevuVeIptalKosullariRoute: typeof RandevuVeIptalKosullariRoute
   SssRoute: typeof SssRoute
   HizmetlerSlugRoute: typeof HizmetlerSlugRoute
   HizmetlerIndexRoute: typeof HizmetlerIndexRoute
@@ -180,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/sss'
       fullPath: '/sss'
       preLoaderRoute: typeof SssRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/randevu-ve-iptal-kosullari': {
+      id: '/randevu-ve-iptal-kosullari'
+      path: '/randevu-ve-iptal-kosullari'
+      fullPath: '/randevu-ve-iptal-kosullari'
+      preLoaderRoute: typeof RandevuVeIptalKosullariRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/randevu': {
@@ -264,6 +284,7 @@ const rootRouteChildren: RootRouteChildren = {
   IletisimRoute: IletisimRoute,
   KullanimKosullariRoute: KullanimKosullariRoute,
   RandevuRoute: RandevuRoute,
+  RandevuVeIptalKosullariRoute: RandevuVeIptalKosullariRoute,
   SssRoute: SssRoute,
   HizmetlerSlugRoute: HizmetlerSlugRoute,
   HizmetlerIndexRoute: HizmetlerIndexRoute,
@@ -271,3 +292,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
