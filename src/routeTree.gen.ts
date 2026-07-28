@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as CalismalarRouteImport } from './routes/calismalar'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HizmetlerIndexRouteImport } from './routes/hizmetler.index'
 import { Route as HizmetlerSlugRouteImport } from './routes/hizmetler.$slug'
 
+const CalismalarRoute = CalismalarRouteImport.update({
+  id: '/calismalar',
+  path: '/calismalar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +37,47 @@ const HizmetlerSlugRoute = HizmetlerSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/calismalar': typeof CalismalarRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/hizmetler/': typeof HizmetlerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/calismalar': typeof CalismalarRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/hizmetler': typeof HizmetlerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/calismalar': typeof CalismalarRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/hizmetler/': typeof HizmetlerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/hizmetler/$slug' | '/hizmetler/'
+  fullPaths: '/' | '/calismalar' | '/hizmetler/$slug' | '/hizmetler/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/hizmetler/$slug' | '/hizmetler'
-  id: '__root__' | '/' | '/hizmetler/$slug' | '/hizmetler/'
+  to: '/' | '/calismalar' | '/hizmetler/$slug' | '/hizmetler'
+  id: '__root__' | '/' | '/calismalar' | '/hizmetler/$slug' | '/hizmetler/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CalismalarRoute: typeof CalismalarRoute
   HizmetlerSlugRoute: typeof HizmetlerSlugRoute
   HizmetlerIndexRoute: typeof HizmetlerIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/calismalar': {
+      id: '/calismalar'
+      path: '/calismalar'
+      fullPath: '/calismalar'
+      preLoaderRoute: typeof CalismalarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CalismalarRoute: CalismalarRoute,
   HizmetlerSlugRoute: HizmetlerSlugRoute,
   HizmetlerIndexRoute: HizmetlerIndexRoute,
 }
