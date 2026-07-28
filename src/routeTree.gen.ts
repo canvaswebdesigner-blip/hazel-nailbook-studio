@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SssRouteImport } from './routes/sss'
 import { Route as RandevuRouteImport } from './routes/randevu'
+import { Route as KullanimKosullariRouteImport } from './routes/kullanim-kosullari'
 import { Route as IletisimRouteImport } from './routes/iletisim'
 import { Route as HijyenRouteImport } from './routes/hijyen'
 import { Route as HakkimdaRouteImport } from './routes/hakkimda'
@@ -28,6 +29,11 @@ const SssRoute = SssRouteImport.update({
 const RandevuRoute = RandevuRouteImport.update({
   id: '/randevu',
   path: '/randevu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KullanimKosullariRoute = KullanimKosullariRouteImport.update({
+  id: '/kullanim-kosullari',
+  path: '/kullanim-kosullari',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IletisimRoute = IletisimRouteImport.update({
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/hakkimda': typeof HakkimdaRoute
   '/hijyen': typeof HijyenRoute
   '/iletisim': typeof IletisimRoute
+  '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/randevu': typeof RandevuRoute
   '/sss': typeof SssRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/hakkimda': typeof HakkimdaRoute
   '/hijyen': typeof HijyenRoute
   '/iletisim': typeof IletisimRoute
+  '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/randevu': typeof RandevuRoute
   '/sss': typeof SssRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/hakkimda': typeof HakkimdaRoute
   '/hijyen': typeof HijyenRoute
   '/iletisim': typeof IletisimRoute
+  '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/randevu': typeof RandevuRoute
   '/sss': typeof SssRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/hakkimda'
     | '/hijyen'
     | '/iletisim'
+    | '/kullanim-kosullari'
     | '/randevu'
     | '/sss'
     | '/hizmetler/$slug'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/hakkimda'
     | '/hijyen'
     | '/iletisim'
+    | '/kullanim-kosullari'
     | '/randevu'
     | '/sss'
     | '/hizmetler/$slug'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/hakkimda'
     | '/hijyen'
     | '/iletisim'
+    | '/kullanim-kosullari'
     | '/randevu'
     | '/sss'
     | '/hizmetler/$slug'
@@ -154,6 +166,7 @@ export interface RootRouteChildren {
   HakkimdaRoute: typeof HakkimdaRoute
   HijyenRoute: typeof HijyenRoute
   IletisimRoute: typeof IletisimRoute
+  KullanimKosullariRoute: typeof KullanimKosullariRoute
   RandevuRoute: typeof RandevuRoute
   SssRoute: typeof SssRoute
   HizmetlerSlugRoute: typeof HizmetlerSlugRoute
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/randevu'
       fullPath: '/randevu'
       preLoaderRoute: typeof RandevuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kullanim-kosullari': {
+      id: '/kullanim-kosullari'
+      path: '/kullanim-kosullari'
+      fullPath: '/kullanim-kosullari'
+      preLoaderRoute: typeof KullanimKosullariRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/iletisim': {
@@ -242,6 +262,7 @@ const rootRouteChildren: RootRouteChildren = {
   HakkimdaRoute: HakkimdaRoute,
   HijyenRoute: HijyenRoute,
   IletisimRoute: IletisimRoute,
+  KullanimKosullariRoute: KullanimKosullariRoute,
   RandevuRoute: RandevuRoute,
   SssRoute: SssRoute,
   HizmetlerSlugRoute: HizmetlerSlugRoute,
