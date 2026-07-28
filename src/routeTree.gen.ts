@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as HijyenRouteImport } from './routes/hijyen'
 import { Route as HakkimdaRouteImport } from './routes/hakkimda'
 import { Route as CalismalarRouteImport } from './routes/calismalar'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HizmetlerIndexRouteImport } from './routes/hizmetler.index'
 import { Route as HizmetlerSlugRouteImport } from './routes/hizmetler.$slug'
 
+const HijyenRoute = HijyenRouteImport.update({
+  id: '/hijyen',
+  path: '/hijyen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HakkimdaRoute = HakkimdaRouteImport.update({
   id: '/hakkimda',
   path: '/hakkimda',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calismalar': typeof CalismalarRoute
   '/hakkimda': typeof HakkimdaRoute
+  '/hijyen': typeof HijyenRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/hizmetler/': typeof HizmetlerIndexRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calismalar': typeof CalismalarRoute
   '/hakkimda': typeof HakkimdaRoute
+  '/hijyen': typeof HijyenRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/hizmetler': typeof HizmetlerIndexRoute
 }
@@ -60,6 +68,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/calismalar': typeof CalismalarRoute
   '/hakkimda': typeof HakkimdaRoute
+  '/hijyen': typeof HijyenRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
   '/hizmetler/': typeof HizmetlerIndexRoute
 }
@@ -69,15 +78,23 @@ export interface FileRouteTypes {
     | '/'
     | '/calismalar'
     | '/hakkimda'
+    | '/hijyen'
     | '/hizmetler/$slug'
     | '/hizmetler/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calismalar' | '/hakkimda' | '/hizmetler/$slug' | '/hizmetler'
+  to:
+    | '/'
+    | '/calismalar'
+    | '/hakkimda'
+    | '/hijyen'
+    | '/hizmetler/$slug'
+    | '/hizmetler'
   id:
     | '__root__'
     | '/'
     | '/calismalar'
     | '/hakkimda'
+    | '/hijyen'
     | '/hizmetler/$slug'
     | '/hizmetler/'
   fileRoutesById: FileRoutesById
@@ -86,12 +103,20 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalismalarRoute: typeof CalismalarRoute
   HakkimdaRoute: typeof HakkimdaRoute
+  HijyenRoute: typeof HijyenRoute
   HizmetlerSlugRoute: typeof HizmetlerSlugRoute
   HizmetlerIndexRoute: typeof HizmetlerIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/hijyen': {
+      id: '/hijyen'
+      path: '/hijyen'
+      fullPath: '/hijyen'
+      preLoaderRoute: typeof HijyenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/hakkimda': {
       id: '/hakkimda'
       path: '/hakkimda'
@@ -134,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalismalarRoute: CalismalarRoute,
   HakkimdaRoute: HakkimdaRoute,
+  HijyenRoute: HijyenRoute,
   HizmetlerSlugRoute: HizmetlerSlugRoute,
   HizmetlerIndexRoute: HizmetlerIndexRoute,
 }
