@@ -3,7 +3,7 @@ import { Instagram, MapPin, MessageCircle } from "lucide-react";
 
 import { Container } from "./Layout";
 import { business, businessHours } from "@/lib/content";
-import { navLinks } from "./SiteHeader";
+import { navLinks } from "@/lib/navigation";
 
 export function SiteFooter() {
   return (
@@ -12,14 +12,12 @@ export function SiteFooter() {
         <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="font-display text-xl">{business.name}</p>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {business.promise}
-            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{business.promise}</p>
             <Link
-              to="/randevu"
+              to="/hizmetler"
               className="mt-5 inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
             >
-              Online Randevu Al
+              Hizmetleri İncele
             </Link>
           </div>
 
@@ -40,14 +38,15 @@ export function SiteFooter() {
           </nav>
 
           <div>
-            <p className="eyebrow mb-4">Çalışma Saatleri</p>
+            <p className="eyebrow mb-2">Örnek çalışma saatleri</p>
+            <p className="mb-4 text-xs text-muted-foreground">
+              Henüz işletme tarafından onaylanmadı.
+            </p>
             <ul className="space-y-1.5 text-sm text-muted-foreground">
               {businessHours.map((h) => (
                 <li key={h.day} className="flex justify-between gap-4">
                   <span>{h.day}</span>
-                  <span className={h.closed ? "text-muted-foreground/70" : ""}>
-                    {h.hours}
-                  </span>
+                  <span>{h.hours}</span>
                 </li>
               ))}
             </ul>
@@ -66,12 +65,16 @@ export function SiteFooter() {
               </li>
               <li className="flex items-start gap-2">
                 <Instagram className="mt-0.5 size-4 shrink-0" aria-hidden />
-                <a
-                  href={business.instagramUrl}
-                  className="transition-colors hover:text-foreground"
-                >
-                  Instagram
-                </a>
+                {business.instagramUrl === "#" ? (
+                  <span>Instagram bağlantısı hazırlanıyor</span>
+                ) : (
+                  <a
+                    href={business.instagramUrl}
+                    className="transition-colors hover:text-foreground"
+                  >
+                    Instagram
+                  </a>
+                )}
               </li>
             </ul>
           </div>
@@ -88,11 +91,11 @@ export function SiteFooter() {
             <Link to="/kullanim-kosullari" className="hover:text-foreground">
               Kullanım Koşulları
             </Link>
-            <Link
-              to="/randevu-ve-iptal-kosullari"
-              className="hover:text-foreground"
-            >
+            <Link to="/randevu-ve-iptal-kosullari" className="hover:text-foreground">
               Randevu ve İptal Koşulları
+            </Link>
+            <Link to="/cerez-tercihleri" className="hover:text-foreground">
+              Çerez Tercihleri
             </Link>
           </div>
         </div>

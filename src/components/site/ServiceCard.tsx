@@ -1,25 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Clock } from "lucide-react";
 
-import type { Service } from "@/lib/content";
-
-export function formatPrice(service: Service) {
-  if (service.priceType === "quote_required") return "Fiyat için görüşelim";
-  if (!service.price) return "Fiyat yakında";
-  const value = new Intl.NumberFormat("tr-TR", {
-    style: "currency",
-    currency: "TRY",
-    maximumFractionDigits: 0,
-  }).format(service.price);
-  return service.priceType === "starting_from" ? `${value}'den başlayan` : value;
-}
-
-export function formatDuration(minutes: number) {
-  if (minutes < 60) return `${minutes} dk`;
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  return m ? `${h} sa ${m} dk` : `${h} sa`;
-}
+import { IS_PLACEHOLDER_CONTENT, type Service } from "@/lib/content";
+import { formatDuration, formatPrice } from "@/lib/service-format";
 
 export function ServiceCard({ service }: { service: Service }) {
   return (
@@ -47,7 +30,7 @@ export function ServiceCard({ service }: { service: Service }) {
           search={{ hizmet: service.slug }}
           className="inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
         >
-          Randevu Al
+          {IS_PLACEHOLDER_CONTENT ? "Randevu Ekranı" : "Randevu Al"}
         </Link>
         <Link
           to="/hizmetler/$slug"

@@ -1,22 +1,34 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CalendarCheck, ShieldCheck, Sparkles } from "lucide-react";
+import { CalendarClock, ShieldCheck, Sparkles } from "lucide-react";
 
 import { Container, Section, SectionHeading } from "@/components/site/Layout";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { GalleryGrid } from "@/components/site/GalleryGrid";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
-import {
-  bookingSteps,
-  business,
-  businessHours,
-  faqItems,
-  services,
-  trustPoints,
-} from "@/lib/content";
+import { business, businessHours, faqItems, services, trustPoints } from "@/lib/content";
 
-const title = "Hazel Ağaoğlu Nail Art Studio | Online Randevu";
+const title = "Hazel Ağaoğlu Nail Art Studio | Buca, İzmir";
 const description =
-  "Buca İzmir'de manikür, kalıcı oje, protez tırnak ve nail art. Uygun saatleri gör, randevunu birkaç adımda online oluştur.";
+  "Buca, İzmir'de manikür, kalıcı oje, protez tırnak ve nail art hizmetlerini incele; uygun saatini online seç.";
+
+const bookingSteps = [
+  {
+    title: "Hizmetini seç",
+    text: "Uygulamanın içeriğini, tahmini süresini ve fiyat türünü gör.",
+  },
+  {
+    title: "Uygun zamanı gör",
+    text: "Takvimde yalnızca seçtiğin hizmete gerçekten uygun olan saatleri incele.",
+  },
+  {
+    title: "Bilgilerini gir",
+    text: "Hesap açmadan gerekli iletişim bilgilerini ve isteğe bağlı notunu ekle.",
+  },
+  {
+    title: "Randevunu yönet",
+    text: "Onaydan sonra gelen özel bağlantıyla randevunu güvenli biçimde görüntüle ve yönet.",
+  },
+] as const;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -48,14 +60,14 @@ function HomePage() {
                 Tırnaklarında sakin, zarif ve sana ait bir detay.
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {business.promise} Mesaj beklemeden, gerçek takvim üzerinden.
+                Hizmetini seç, uygun saatini gör ve randevunu birkaç adımda oluştur.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   to="/randevu"
                   className="inline-flex h-13 items-center rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
                 >
-                  Uygun Saatleri Gör
+                  Online Randevu Al
                 </Link>
                 <Link
                   to="/hizmetler"
@@ -67,14 +79,11 @@ function HomePage() {
 
               <ul className="mt-10 grid gap-3 sm:grid-cols-3">
                 {[
-                  { icon: CalendarCheck, text: "7/24 online randevu" },
-                  { icon: ShieldCheck, text: "Hijyen odaklı uygulama" },
-                  { icon: Sparkles, text: "Kişiye özel tasarım" },
+                  { icon: CalendarClock, text: "Canlı müsaitlik" },
+                  { icon: ShieldCheck, text: "Güvenli randevu yönetimi" },
+                  { icon: Sparkles, text: "Mobil öncelikli akış" },
                 ].map(({ icon: Icon, text }) => (
-                  <li
-                    key={text}
-                    className="flex items-center gap-2 text-sm text-muted-foreground"
-                  >
+                  <li key={text} className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Icon className="size-4 shrink-0 text-primary" aria-hidden />
                     {text}
                   </li>
@@ -98,12 +107,15 @@ function HomePage() {
       <Section className="border-y border-border bg-card">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <SectionHeading
-            eyebrow="Bugünün durumu"
-            title="En yakın uygun saatleri randevu ekranında canlı olarak görebilirsin."
-            description="Takvim gerçek doluluk üzerinden çalışır; seçtiğin saat başkasına açık kalmaz."
+            eyebrow="Randevu sistemi"
+            title="Mesaj beklemeden uygun saatini seç."
+            description="Randevu ekranı seçtiğin hizmet için güncel takvimi kontrol eder; onay anında müsaitlik tekrar doğrulanır."
           />
           <div className="rounded-3xl border border-border bg-background p-6">
-            <p className="eyebrow mb-4">Çalışma saatleri</p>
+            <p className="eyebrow mb-2">Örnek çalışma saatleri</p>
+            <p className="mb-4 text-sm text-muted-foreground">
+              Bu saatler işletme tarafından henüz onaylanmadı.
+            </p>
             <ul className="grid gap-1.5 text-sm sm:grid-cols-2">
               {businessHours.map((h) => (
                 <li
@@ -119,7 +131,7 @@ function HomePage() {
               to="/randevu"
               className="mt-6 inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground"
             >
-              Randevu Al
+              Online Randevu Al
             </Link>
           </div>
         </div>
@@ -129,7 +141,7 @@ function HomePage() {
         <SectionHeading
           eyebrow="Hizmetler"
           title="Öne çıkan uygulamalar"
-          description="Her hizmetin süresi ve fiyat bilgisi randevu adımında tekrar gösterilir."
+          description="Hizmet içerikleri, süreler ve fiyatlar şu anda örnek veridir; işletme onayından sonra kesinleşecek."
         />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {featured.map((service) => (
@@ -145,23 +157,15 @@ function HomePage() {
       </Section>
 
       <Section className="bg-card">
-        <SectionHeading
-          eyebrow="Nasıl çalışır"
-          title="Dört adımda randevu"
-        />
+        <SectionHeading eyebrow="Nasıl çalışır?" title="Dört kısa adımda randevun hazır." />
         <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {bookingSteps.map((step, i) => (
-            <li
-              key={step.title}
-              className="rounded-3xl border border-border bg-background p-6"
-            >
+            <li key={step.title} className="rounded-3xl border border-border bg-background p-6">
               <span className="font-display text-3xl text-primary">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-3 text-lg">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {step.text}
-              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.text}</p>
             </li>
           ))}
         </ol>
@@ -170,7 +174,7 @@ function HomePage() {
       <Section>
         <SectionHeading
           eyebrow="Çalışmalar"
-          title="Son işlerden bir seçki"
+          title="Portfolyo düzeni ön izlemesi"
           description="Gerçek çalışma fotoğrafları yüklenene kadar bu alan örnek görsellerle gösteriliyor."
         />
         <div className="mt-10">
@@ -188,16 +192,14 @@ function HomePage() {
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <SectionHeading
-              eyebrow="Hijyen"
-              title="Rahat hissetmen için net kurallar"
+              eyebrow="Hijyen taslağı"
+              title="Planlanan stüdyo standartları"
+              description="Aşağıdaki maddeler örnek içeriktir; Hazel'in gerçek çalışma düzeni ve onayıyla kesinleştirilecektir."
             />
             <ul className="mt-8 space-y-4">
               {trustPoints.map((point) => (
                 <li key={point.title} className="flex gap-3">
-                  <ShieldCheck
-                    className="mt-0.5 size-5 shrink-0 text-primary"
-                    aria-hidden
-                  />
+                  <ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
                   <div>
                     <p className="font-medium">{point.title}</p>
                     <p className="text-sm text-muted-foreground">{point.text}</p>
@@ -209,7 +211,7 @@ function HomePage() {
               to="/hijyen"
               className="mt-8 inline-flex h-11 items-center rounded-full border border-border px-5 text-sm font-medium hover:bg-muted"
             >
-              Hijyen protokolü
+              Hijyen yaklaşımını incele
             </Link>
           </div>
 
@@ -230,12 +232,9 @@ function HomePage() {
 
       <Section>
         <div className="rounded-[2rem] border border-border bg-gradient-to-br from-[#F3E6E7] to-[#E7DBD6] p-10 text-center sm:p-16">
-          <h2 className="text-balance text-3xl sm:text-4xl">
-            Uygun saatini şimdi ayırt.
-          </h2>
+          <h2 className="text-balance text-3xl sm:text-4xl">Uygun saatini şimdi seç.</h2>
           <p className="mx-auto mt-4 max-w-lg text-sm text-muted-foreground sm:text-base">
-            Randevunu oluşturduktan sonra sana özel bağlantı ile dilediğin zaman
-            görüntüleyebilir, erteleyebilir veya iptal edebilirsin.
+            Hizmetini belirle, takvimdeki gerçek boşlukları gör ve randevunu birkaç adımda tamamla.
           </p>
           <Link
             to="/randevu"

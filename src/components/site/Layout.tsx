@@ -1,18 +1,8 @@
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
-export function Container({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div className={cn("mx-auto w-full max-w-6xl px-5 sm:px-8", className)}>
-      {children}
-    </div>
-  );
+export function Container({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={cn("mx-auto w-full max-w-6xl px-5 sm:px-8", className)}>{children}</div>;
 }
 
 export function Section({
@@ -46,20 +36,11 @@ export function SectionHeading({
 }) {
   const Heading = as;
   return (
-    <div
-      className={cn(
-        "max-w-2xl",
-        align === "center" && "mx-auto text-center",
-      )}
-    >
+    <div className={cn("max-w-2xl", align === "center" && "mx-auto text-center")}>
       {eyebrow ? <p className="eyebrow mb-3">{eyebrow}</p> : null}
-      <Heading className="text-balance text-3xl leading-tight sm:text-4xl">
-        {title}
-      </Heading>
+      <Heading className="text-balance text-3xl leading-tight sm:text-4xl">{title}</Heading>
       {description ? (
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-          {description}
-        </p>
+        <p className="mt-4 text-base leading-relaxed text-muted-foreground">{description}</p>
       ) : null}
     </div>
   );

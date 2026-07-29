@@ -9,57 +9,44 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SssRouteImport } from './routes/sss'
-import { Route as RandevuVeIptalKosullariRouteImport } from './routes/randevu-ve-iptal-kosullari'
-import { Route as RandevuRouteImport } from './routes/randevu'
-import { Route as KullanimKosullariRouteImport } from './routes/kullanim-kosullari'
-import { Route as IletisimRouteImport } from './routes/iletisim'
-import { Route as HijyenRouteImport } from './routes/hijyen'
-import { Route as HakkimdaRouteImport } from './routes/hakkimda'
-import { Route as GizlilikRouteImport } from './routes/gizlilik'
-import { Route as CalismalarRouteImport } from './routes/calismalar'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as CalismalarRouteImport } from './routes/calismalar'
+import { Route as CerezTercihleriRouteImport } from './routes/cerez-tercihleri'
+import { Route as GizlilikRouteImport } from './routes/gizlilik'
+import { Route as HakkimdaRouteImport } from './routes/hakkimda'
+import { Route as HijyenRouteImport } from './routes/hijyen'
+import { Route as IletisimRouteImport } from './routes/iletisim'
+import { Route as KullanimKosullariRouteImport } from './routes/kullanim-kosullari'
+import { Route as RandevuRouteImport } from './routes/randevu'
+import { Route as RandevuBasariliRouteImport } from './routes/randevu-basarili'
+import { Route as RandevuVeIptalKosullariRouteImport } from './routes/randevu-ve-iptal-kosullari'
+import { Route as RandevuYonetRouteImport } from './routes/randevu-yonet'
+import { Route as SssRouteImport } from './routes/sss'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated.admin'
+import { Route as AdminGirisRouteImport } from './routes/admin.giris'
+import { Route as AdminMfaRouteImport } from './routes/admin.mfa'
+import { Route as AdminMfaDogrulaRouteImport } from './routes/admin.mfa-dogrula'
+import { Route as AdminSifreSifirlaRouteImport } from './routes/admin.sifre-sifirla'
+import { Route as AdminSifremiUnuttumRouteImport } from './routes/admin.sifremi-unuttum'
 import { Route as HizmetlerIndexRouteImport } from './routes/hizmetler.index'
 import { Route as HizmetlerSlugRouteImport } from './routes/hizmetler.$slug'
+import { Route as RandevuBasariliReceiptTokenRouteImport } from './routes/randevu-basarili.$receiptToken'
+import { Route as RandevuYonetManagementTokenRouteImport } from './routes/randevu-yonet.$managementToken'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated.admin.index'
+import { Route as AuthenticatedAdminHizmetlerRouteImport } from './routes/_authenticated.admin.hizmetler'
+import { Route as AuthenticatedAdminMesajlarRouteImport } from './routes/_authenticated.admin.mesajlar'
+import { Route as AuthenticatedAdminRandevularRouteImport } from './routes/_authenticated.admin.randevular'
+import { Route as AdminAuthCallbackRouteImport } from './routes/admin.auth.callback'
+import { Route as ApiPublicHealthRouteImport } from './routes/api.public.health'
 
-const SssRoute = SssRouteImport.update({
-  id: '/sss',
-  path: '/sss',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RandevuVeIptalKosullariRoute = RandevuVeIptalKosullariRouteImport.update({
-  id: '/randevu-ve-iptal-kosullari',
-  path: '/randevu-ve-iptal-kosullari',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RandevuRoute = RandevuRouteImport.update({
-  id: '/randevu',
-  path: '/randevu',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KullanimKosullariRoute = KullanimKosullariRouteImport.update({
-  id: '/kullanim-kosullari',
-  path: '/kullanim-kosullari',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IletisimRoute = IletisimRouteImport.update({
-  id: '/iletisim',
-  path: '/iletisim',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HijyenRoute = HijyenRouteImport.update({
-  id: '/hijyen',
-  path: '/hijyen',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HakkimdaRoute = HakkimdaRouteImport.update({
-  id: '/hakkimda',
-  path: '/hakkimda',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GizlilikRoute = GizlilikRouteImport.update({
-  id: '/gizlilik',
-  path: '/gizlilik',
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CalismalarRoute = CalismalarRouteImport.update({
@@ -67,9 +54,89 @@ const CalismalarRoute = CalismalarRouteImport.update({
   path: '/calismalar',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const CerezTercihleriRoute = CerezTercihleriRouteImport.update({
+  id: '/cerez-tercihleri',
+  path: '/cerez-tercihleri',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GizlilikRoute = GizlilikRouteImport.update({
+  id: '/gizlilik',
+  path: '/gizlilik',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HakkimdaRoute = HakkimdaRouteImport.update({
+  id: '/hakkimda',
+  path: '/hakkimda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HijyenRoute = HijyenRouteImport.update({
+  id: '/hijyen',
+  path: '/hijyen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IletisimRoute = IletisimRouteImport.update({
+  id: '/iletisim',
+  path: '/iletisim',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KullanimKosullariRoute = KullanimKosullariRouteImport.update({
+  id: '/kullanim-kosullari',
+  path: '/kullanim-kosullari',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RandevuRoute = RandevuRouteImport.update({
+  id: '/randevu',
+  path: '/randevu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RandevuBasariliRoute = RandevuBasariliRouteImport.update({
+  id: '/randevu-basarili',
+  path: '/randevu-basarili',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RandevuVeIptalKosullariRoute = RandevuVeIptalKosullariRouteImport.update({
+  id: '/randevu-ve-iptal-kosullari',
+  path: '/randevu-ve-iptal-kosullari',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RandevuYonetRoute = RandevuYonetRouteImport.update({
+  id: '/randevu-yonet',
+  path: '/randevu-yonet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SssRoute = SssRouteImport.update({
+  id: '/sss',
+  path: '/sss',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AdminGirisRoute = AdminGirisRouteImport.update({
+  id: '/admin/giris',
+  path: '/admin/giris',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMfaRoute = AdminMfaRouteImport.update({
+  id: '/admin/mfa',
+  path: '/admin/mfa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMfaDogrulaRoute = AdminMfaDogrulaRouteImport.update({
+  id: '/admin/mfa-dogrula',
+  path: '/admin/mfa-dogrula',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSifreSifirlaRoute = AdminSifreSifirlaRouteImport.update({
+  id: '/admin/sifre-sifirla',
+  path: '/admin/sifre-sifirla',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSifremiUnuttumRoute = AdminSifremiUnuttumRouteImport.update({
+  id: '/admin/sifremi-unuttum',
+  path: '/admin/sifremi-unuttum',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HizmetlerIndexRoute = HizmetlerIndexRouteImport.update({
@@ -82,166 +149,282 @@ const HizmetlerSlugRoute = HizmetlerSlugRouteImport.update({
   path: '/hizmetler/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RandevuBasariliReceiptTokenRoute =
+  RandevuBasariliReceiptTokenRouteImport.update({
+    id: '/$receiptToken',
+    path: '/$receiptToken',
+    getParentRoute: () => RandevuBasariliRoute,
+  } as any)
+const RandevuYonetManagementTokenRoute =
+  RandevuYonetManagementTokenRouteImport.update({
+    id: '/$managementToken',
+    path: '/$managementToken',
+    getParentRoute: () => RandevuYonetRoute,
+  } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminHizmetlerRoute =
+  AuthenticatedAdminHizmetlerRouteImport.update({
+    id: '/hizmetler',
+    path: '/hizmetler',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminMesajlarRoute =
+  AuthenticatedAdminMesajlarRouteImport.update({
+    id: '/mesajlar',
+    path: '/mesajlar',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminRandevularRoute =
+  AuthenticatedAdminRandevularRouteImport.update({
+    id: '/randevular',
+    path: '/randevular',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AdminAuthCallbackRoute = AdminAuthCallbackRouteImport.update({
+  id: '/admin/auth/callback',
+  path: '/admin/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicHealthRoute = ApiPublicHealthRouteImport.update({
+  id: '/api/public/health',
+  path: '/api/public/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calismalar': typeof CalismalarRoute
+  '/cerez-tercihleri': typeof CerezTercihleriRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimda': typeof HakkimdaRoute
   '/hijyen': typeof HijyenRoute
   '/iletisim': typeof IletisimRoute
   '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/randevu': typeof RandevuRoute
+  '/randevu-basarili': typeof RandevuBasariliRouteWithChildren
   '/randevu-ve-iptal-kosullari': typeof RandevuVeIptalKosullariRoute
+  '/randevu-yonet': typeof RandevuYonetRouteWithChildren
   '/sss': typeof SssRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin/giris': typeof AdminGirisRoute
+  '/admin/mfa': typeof AdminMfaRoute
+  '/admin/mfa-dogrula': typeof AdminMfaDogrulaRoute
+  '/admin/sifre-sifirla': typeof AdminSifreSifirlaRoute
+  '/admin/sifremi-unuttum': typeof AdminSifremiUnuttumRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
+  '/randevu-basarili/$receiptToken': typeof RandevuBasariliReceiptTokenRoute
+  '/randevu-yonet/$managementToken': typeof RandevuYonetManagementTokenRoute
   '/hizmetler/': typeof HizmetlerIndexRoute
+  '/admin/hizmetler': typeof AuthenticatedAdminHizmetlerRoute
+  '/admin/mesajlar': typeof AuthenticatedAdminMesajlarRoute
+  '/admin/randevular': typeof AuthenticatedAdminRandevularRoute
+  '/admin/auth/callback': typeof AdminAuthCallbackRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calismalar': typeof CalismalarRoute
+  '/cerez-tercihleri': typeof CerezTercihleriRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimda': typeof HakkimdaRoute
   '/hijyen': typeof HijyenRoute
   '/iletisim': typeof IletisimRoute
   '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/randevu': typeof RandevuRoute
+  '/randevu-basarili': typeof RandevuBasariliRouteWithChildren
   '/randevu-ve-iptal-kosullari': typeof RandevuVeIptalKosullariRoute
+  '/randevu-yonet': typeof RandevuYonetRouteWithChildren
   '/sss': typeof SssRoute
+  '/admin/giris': typeof AdminGirisRoute
+  '/admin/mfa': typeof AdminMfaRoute
+  '/admin/mfa-dogrula': typeof AdminMfaDogrulaRoute
+  '/admin/sifre-sifirla': typeof AdminSifreSifirlaRoute
+  '/admin/sifremi-unuttum': typeof AdminSifremiUnuttumRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
+  '/randevu-basarili/$receiptToken': typeof RandevuBasariliReceiptTokenRoute
+  '/randevu-yonet/$managementToken': typeof RandevuYonetManagementTokenRoute
   '/hizmetler': typeof HizmetlerIndexRoute
+  '/admin/hizmetler': typeof AuthenticatedAdminHizmetlerRoute
+  '/admin/mesajlar': typeof AuthenticatedAdminMesajlarRoute
+  '/admin/randevular': typeof AuthenticatedAdminRandevularRoute
+  '/admin/auth/callback': typeof AdminAuthCallbackRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/calismalar': typeof CalismalarRoute
+  '/cerez-tercihleri': typeof CerezTercihleriRoute
   '/gizlilik': typeof GizlilikRoute
   '/hakkimda': typeof HakkimdaRoute
   '/hijyen': typeof HijyenRoute
   '/iletisim': typeof IletisimRoute
   '/kullanim-kosullari': typeof KullanimKosullariRoute
   '/randevu': typeof RandevuRoute
+  '/randevu-basarili': typeof RandevuBasariliRouteWithChildren
   '/randevu-ve-iptal-kosullari': typeof RandevuVeIptalKosullariRoute
+  '/randevu-yonet': typeof RandevuYonetRouteWithChildren
   '/sss': typeof SssRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin/giris': typeof AdminGirisRoute
+  '/admin/mfa': typeof AdminMfaRoute
+  '/admin/mfa-dogrula': typeof AdminMfaDogrulaRoute
+  '/admin/sifre-sifirla': typeof AdminSifreSifirlaRoute
+  '/admin/sifremi-unuttum': typeof AdminSifremiUnuttumRoute
   '/hizmetler/$slug': typeof HizmetlerSlugRoute
+  '/randevu-basarili/$receiptToken': typeof RandevuBasariliReceiptTokenRoute
+  '/randevu-yonet/$managementToken': typeof RandevuYonetManagementTokenRoute
   '/hizmetler/': typeof HizmetlerIndexRoute
+  '/_authenticated/admin/hizmetler': typeof AuthenticatedAdminHizmetlerRoute
+  '/_authenticated/admin/mesajlar': typeof AuthenticatedAdminMesajlarRoute
+  '/_authenticated/admin/randevular': typeof AuthenticatedAdminRandevularRoute
+  '/admin/auth/callback': typeof AdminAuthCallbackRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/calismalar'
+    | '/cerez-tercihleri'
     | '/gizlilik'
     | '/hakkimda'
     | '/hijyen'
     | '/iletisim'
     | '/kullanim-kosullari'
     | '/randevu'
+    | '/randevu-basarili'
     | '/randevu-ve-iptal-kosullari'
+    | '/randevu-yonet'
     | '/sss'
+    | '/admin'
+    | '/admin/giris'
+    | '/admin/mfa'
+    | '/admin/mfa-dogrula'
+    | '/admin/sifre-sifirla'
+    | '/admin/sifremi-unuttum'
     | '/hizmetler/$slug'
+    | '/randevu-basarili/$receiptToken'
+    | '/randevu-yonet/$managementToken'
     | '/hizmetler/'
+    | '/admin/hizmetler'
+    | '/admin/mesajlar'
+    | '/admin/randevular'
+    | '/admin/auth/callback'
+    | '/api/public/health'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/calismalar'
+    | '/cerez-tercihleri'
     | '/gizlilik'
     | '/hakkimda'
     | '/hijyen'
     | '/iletisim'
     | '/kullanim-kosullari'
     | '/randevu'
+    | '/randevu-basarili'
     | '/randevu-ve-iptal-kosullari'
+    | '/randevu-yonet'
     | '/sss'
+    | '/admin/giris'
+    | '/admin/mfa'
+    | '/admin/mfa-dogrula'
+    | '/admin/sifre-sifirla'
+    | '/admin/sifremi-unuttum'
     | '/hizmetler/$slug'
+    | '/randevu-basarili/$receiptToken'
+    | '/randevu-yonet/$managementToken'
     | '/hizmetler'
+    | '/admin/hizmetler'
+    | '/admin/mesajlar'
+    | '/admin/randevular'
+    | '/admin/auth/callback'
+    | '/api/public/health'
+    | '/admin'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/calismalar'
+    | '/cerez-tercihleri'
     | '/gizlilik'
     | '/hakkimda'
     | '/hijyen'
     | '/iletisim'
     | '/kullanim-kosullari'
     | '/randevu'
+    | '/randevu-basarili'
     | '/randevu-ve-iptal-kosullari'
+    | '/randevu-yonet'
     | '/sss'
+    | '/_authenticated/admin'
+    | '/admin/giris'
+    | '/admin/mfa'
+    | '/admin/mfa-dogrula'
+    | '/admin/sifre-sifirla'
+    | '/admin/sifremi-unuttum'
     | '/hizmetler/$slug'
+    | '/randevu-basarili/$receiptToken'
+    | '/randevu-yonet/$managementToken'
     | '/hizmetler/'
+    | '/_authenticated/admin/hizmetler'
+    | '/_authenticated/admin/mesajlar'
+    | '/_authenticated/admin/randevular'
+    | '/admin/auth/callback'
+    | '/api/public/health'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   CalismalarRoute: typeof CalismalarRoute
+  CerezTercihleriRoute: typeof CerezTercihleriRoute
   GizlilikRoute: typeof GizlilikRoute
   HakkimdaRoute: typeof HakkimdaRoute
   HijyenRoute: typeof HijyenRoute
   IletisimRoute: typeof IletisimRoute
   KullanimKosullariRoute: typeof KullanimKosullariRoute
   RandevuRoute: typeof RandevuRoute
+  RandevuBasariliRoute: typeof RandevuBasariliRouteWithChildren
   RandevuVeIptalKosullariRoute: typeof RandevuVeIptalKosullariRoute
+  RandevuYonetRoute: typeof RandevuYonetRouteWithChildren
   SssRoute: typeof SssRoute
+  AdminGirisRoute: typeof AdminGirisRoute
+  AdminMfaRoute: typeof AdminMfaRoute
+  AdminMfaDogrulaRoute: typeof AdminMfaDogrulaRoute
+  AdminSifreSifirlaRoute: typeof AdminSifreSifirlaRoute
+  AdminSifremiUnuttumRoute: typeof AdminSifremiUnuttumRoute
   HizmetlerSlugRoute: typeof HizmetlerSlugRoute
   HizmetlerIndexRoute: typeof HizmetlerIndexRoute
+  AdminAuthCallbackRoute: typeof AdminAuthCallbackRoute
+  ApiPublicHealthRoute: typeof ApiPublicHealthRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sss': {
-      id: '/sss'
-      path: '/sss'
-      fullPath: '/sss'
-      preLoaderRoute: typeof SssRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/randevu-ve-iptal-kosullari': {
-      id: '/randevu-ve-iptal-kosullari'
-      path: '/randevu-ve-iptal-kosullari'
-      fullPath: '/randevu-ve-iptal-kosullari'
-      preLoaderRoute: typeof RandevuVeIptalKosullariRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/randevu': {
-      id: '/randevu'
-      path: '/randevu'
-      fullPath: '/randevu'
-      preLoaderRoute: typeof RandevuRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/kullanim-kosullari': {
-      id: '/kullanim-kosullari'
-      path: '/kullanim-kosullari'
-      fullPath: '/kullanim-kosullari'
-      preLoaderRoute: typeof KullanimKosullariRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/iletisim': {
-      id: '/iletisim'
-      path: '/iletisim'
-      fullPath: '/iletisim'
-      preLoaderRoute: typeof IletisimRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hijyen': {
-      id: '/hijyen'
-      path: '/hijyen'
-      fullPath: '/hijyen'
-      preLoaderRoute: typeof HijyenRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hakkimda': {
-      id: '/hakkimda'
-      path: '/hakkimda'
-      fullPath: '/hakkimda'
-      preLoaderRoute: typeof HakkimdaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gizlilik': {
-      id: '/gizlilik'
-      path: '/gizlilik'
-      fullPath: '/gizlilik'
-      preLoaderRoute: typeof GizlilikRouteImport
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/calismalar': {
@@ -251,11 +434,123 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CalismalarRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/cerez-tercihleri': {
+      id: '/cerez-tercihleri'
+      path: '/cerez-tercihleri'
+      fullPath: '/cerez-tercihleri'
+      preLoaderRoute: typeof CerezTercihleriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gizlilik': {
+      id: '/gizlilik'
+      path: '/gizlilik'
+      fullPath: '/gizlilik'
+      preLoaderRoute: typeof GizlilikRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hakkimda': {
+      id: '/hakkimda'
+      path: '/hakkimda'
+      fullPath: '/hakkimda'
+      preLoaderRoute: typeof HakkimdaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hijyen': {
+      id: '/hijyen'
+      path: '/hijyen'
+      fullPath: '/hijyen'
+      preLoaderRoute: typeof HijyenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/iletisim': {
+      id: '/iletisim'
+      path: '/iletisim'
+      fullPath: '/iletisim'
+      preLoaderRoute: typeof IletisimRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kullanim-kosullari': {
+      id: '/kullanim-kosullari'
+      path: '/kullanim-kosullari'
+      fullPath: '/kullanim-kosullari'
+      preLoaderRoute: typeof KullanimKosullariRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/randevu': {
+      id: '/randevu'
+      path: '/randevu'
+      fullPath: '/randevu'
+      preLoaderRoute: typeof RandevuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/randevu-basarili': {
+      id: '/randevu-basarili'
+      path: '/randevu-basarili'
+      fullPath: '/randevu-basarili'
+      preLoaderRoute: typeof RandevuBasariliRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/randevu-ve-iptal-kosullari': {
+      id: '/randevu-ve-iptal-kosullari'
+      path: '/randevu-ve-iptal-kosullari'
+      fullPath: '/randevu-ve-iptal-kosullari'
+      preLoaderRoute: typeof RandevuVeIptalKosullariRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/randevu-yonet': {
+      id: '/randevu-yonet'
+      path: '/randevu-yonet'
+      fullPath: '/randevu-yonet'
+      preLoaderRoute: typeof RandevuYonetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sss': {
+      id: '/sss'
+      path: '/sss'
+      fullPath: '/sss'
+      preLoaderRoute: typeof SssRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/admin/giris': {
+      id: '/admin/giris'
+      path: '/admin/giris'
+      fullPath: '/admin/giris'
+      preLoaderRoute: typeof AdminGirisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/mfa': {
+      id: '/admin/mfa'
+      path: '/admin/mfa'
+      fullPath: '/admin/mfa'
+      preLoaderRoute: typeof AdminMfaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/mfa-dogrula': {
+      id: '/admin/mfa-dogrula'
+      path: '/admin/mfa-dogrula'
+      fullPath: '/admin/mfa-dogrula'
+      preLoaderRoute: typeof AdminMfaDogrulaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/sifre-sifirla': {
+      id: '/admin/sifre-sifirla'
+      path: '/admin/sifre-sifirla'
+      fullPath: '/admin/sifre-sifirla'
+      preLoaderRoute: typeof AdminSifreSifirlaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/sifremi-unuttum': {
+      id: '/admin/sifremi-unuttum'
+      path: '/admin/sifremi-unuttum'
+      fullPath: '/admin/sifremi-unuttum'
+      preLoaderRoute: typeof AdminSifremiUnuttumRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hizmetler/': {
@@ -272,23 +567,153 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HizmetlerSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/randevu-basarili/$receiptToken': {
+      id: '/randevu-basarili/$receiptToken'
+      path: '/$receiptToken'
+      fullPath: '/randevu-basarili/$receiptToken'
+      preLoaderRoute: typeof RandevuBasariliReceiptTokenRouteImport
+      parentRoute: typeof RandevuBasariliRoute
+    }
+    '/randevu-yonet/$managementToken': {
+      id: '/randevu-yonet/$managementToken'
+      path: '/$managementToken'
+      fullPath: '/randevu-yonet/$managementToken'
+      preLoaderRoute: typeof RandevuYonetManagementTokenRouteImport
+      parentRoute: typeof RandevuYonetRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/hizmetler': {
+      id: '/_authenticated/admin/hizmetler'
+      path: '/hizmetler'
+      fullPath: '/admin/hizmetler'
+      preLoaderRoute: typeof AuthenticatedAdminHizmetlerRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/mesajlar': {
+      id: '/_authenticated/admin/mesajlar'
+      path: '/mesajlar'
+      fullPath: '/admin/mesajlar'
+      preLoaderRoute: typeof AuthenticatedAdminMesajlarRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/randevular': {
+      id: '/_authenticated/admin/randevular'
+      path: '/randevular'
+      fullPath: '/admin/randevular'
+      preLoaderRoute: typeof AuthenticatedAdminRandevularRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/admin/auth/callback': {
+      id: '/admin/auth/callback'
+      path: '/admin/auth/callback'
+      fullPath: '/admin/auth/callback'
+      preLoaderRoute: typeof AdminAuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/health': {
+      id: '/api/public/health'
+      path: '/api/public/health'
+      fullPath: '/api/public/health'
+      preLoaderRoute: typeof ApiPublicHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminHizmetlerRoute: typeof AuthenticatedAdminHizmetlerRoute
+  AuthenticatedAdminMesajlarRoute: typeof AuthenticatedAdminMesajlarRoute
+  AuthenticatedAdminRandevularRoute: typeof AuthenticatedAdminRandevularRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminHizmetlerRoute: AuthenticatedAdminHizmetlerRoute,
+  AuthenticatedAdminMesajlarRoute: AuthenticatedAdminMesajlarRoute,
+  AuthenticatedAdminRandevularRoute: AuthenticatedAdminRandevularRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
+interface AuthenticatedRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
+interface RandevuBasariliRouteChildren {
+  RandevuBasariliReceiptTokenRoute: typeof RandevuBasariliReceiptTokenRoute
+}
+
+const RandevuBasariliRouteChildren: RandevuBasariliRouteChildren = {
+  RandevuBasariliReceiptTokenRoute: RandevuBasariliReceiptTokenRoute,
+}
+
+const RandevuBasariliRouteWithChildren = RandevuBasariliRoute._addFileChildren(
+  RandevuBasariliRouteChildren,
+)
+
+interface RandevuYonetRouteChildren {
+  RandevuYonetManagementTokenRoute: typeof RandevuYonetManagementTokenRoute
+}
+
+const RandevuYonetRouteChildren: RandevuYonetRouteChildren = {
+  RandevuYonetManagementTokenRoute: RandevuYonetManagementTokenRoute,
+}
+
+const RandevuYonetRouteWithChildren = RandevuYonetRoute._addFileChildren(
+  RandevuYonetRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   CalismalarRoute: CalismalarRoute,
+  CerezTercihleriRoute: CerezTercihleriRoute,
   GizlilikRoute: GizlilikRoute,
   HakkimdaRoute: HakkimdaRoute,
   HijyenRoute: HijyenRoute,
   IletisimRoute: IletisimRoute,
   KullanimKosullariRoute: KullanimKosullariRoute,
   RandevuRoute: RandevuRoute,
+  RandevuBasariliRoute: RandevuBasariliRouteWithChildren,
   RandevuVeIptalKosullariRoute: RandevuVeIptalKosullariRoute,
+  RandevuYonetRoute: RandevuYonetRouteWithChildren,
   SssRoute: SssRoute,
+  AdminGirisRoute: AdminGirisRoute,
+  AdminMfaRoute: AdminMfaRoute,
+  AdminMfaDogrulaRoute: AdminMfaDogrulaRoute,
+  AdminSifreSifirlaRoute: AdminSifreSifirlaRoute,
+  AdminSifremiUnuttumRoute: AdminSifremiUnuttumRoute,
   HizmetlerSlugRoute: HizmetlerSlugRoute,
   HizmetlerIndexRoute: HizmetlerIndexRoute,
+  AdminAuthCallbackRoute: AdminAuthCallbackRoute,
+  ApiPublicHealthRoute: ApiPublicHealthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

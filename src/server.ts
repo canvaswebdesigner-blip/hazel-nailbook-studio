@@ -1,7 +1,6 @@
-import "./lib/error-capture";
-
-import { consumeLastCapturedError } from "./lib/error-capture";
-import { renderErrorPage } from "./lib/error-page";
+import { attachRequestId, createRequestId, logServerError } from "./lib/error-capture";
+import { createErrorResponse } from "./lib/error-page";
+import { withSecurityHeaders } from "./lib/security-headers";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -18,9 +17,14 @@ async function getServerEntry(): Promise<ServerEntry> {
   return serverEntryPromise;
 }
 
-// h3 swallows in-handler throws into a normal 500 Response with body
-// {"unhandled":true,"message":"HTTPError"} — try/catch alone never fires for those.
-async function normalizeCatastrophicSsrResponse(response: Response): Promise<Response> {
+// h3 can turn catastrophic in-handler failures into this opaque JSON response.
+// The request middleware normally catches application failures first; this is
+// a final boundary for errors that occur outside that middleware.
+async function normalizeCatastrophicSsrResponse(
+  response: Response,
+  request: Request,
+  requestId: string,
+): Promise<Response> {
   if (response.status < 500) return response;
   const contentType = response.headers.get("content-type") ?? "";
   if (!contentType.includes("application/json")) return response;
@@ -28,11 +32,14 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
   const body = await response.clone().text();
   if (!isH3SwallowedErrorBody(body)) return response;
 
-  console.error(consumeLastCapturedError() ?? new Error(`h3 swallowed SSR error: ${body}`));
-  return new Response(renderErrorPage(), {
-    status: 500,
-    headers: { "content-type": "text/html; charset=utf-8" },
+  logServerError({
+    error: new Error("The SSR runtime returned an opaque unhandled error"),
+    operation: "ssr.catastrophic_response",
+    request,
+    requestId,
+    status: response.status,
   });
+  return createErrorResponse(requestId);
 }
 
 function isH3SwallowedErrorBody(body: string): boolean {
@@ -46,15 +53,24 @@ function isH3SwallowedErrorBody(body: string): boolean {
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    const requestId = createRequestId();
+    attachRequestId(request, requestId);
+
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      const normalized = await normalizeCatastrophicSsrResponse(response, request, requestId);
+      return withSecurityHeaders(normalized, { request, requestId });
     } catch (error) {
-      console.error(error);
-      return new Response(renderErrorPage(), {
-        status: 500,
-        headers: { "content-type": "text/html; charset=utf-8" },
+      logServerError({
+        error,
+        operation: "server.fetch",
+        request,
+        requestId,
+      });
+      return withSecurityHeaders(createErrorResponse(requestId), {
+        request,
+        requestId,
       });
     }
   },

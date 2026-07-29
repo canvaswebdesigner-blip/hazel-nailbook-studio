@@ -6,14 +6,16 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "../components/site/SiteHeader";
 import { SiteFooter } from "../components/site/SiteFooter";
 import { StickyBookCta } from "../components/site/StickyBookCta";
+import { IS_PLACEHOLDER_CONTENT } from "../lib/content";
 
 function NotFoundComponent() {
   return (
@@ -38,7 +40,6 @@ function NotFoundComponent() {
 }
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
-  console.error(error);
   const router = useRouter();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
@@ -48,10 +49,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          Bu sayfa yüklenemedi
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Beklenmeyen bir sorun oluştu. Yeniden deneyebilir veya ana sayfaya dönebilirsin.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -61,13 +62,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            Yeniden dene
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            Ana sayfaya dön
           </a>
         </div>
       </div>
@@ -84,7 +85,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Hazel Ağaoğlu Nail Art Studio" },
       { property: "og:locale", content: "tr_TR" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:card", content: "summary" },
+      {
+        name: "robots",
+        content: IS_PLACEHOLDER_CONTENT ? "noindex, nofollow" : "index, follow",
+      },
       { name: "theme-color", content: "#FBF7F3" },
     ],
     links: [
@@ -92,15 +97,33 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
+        rel: "preload",
+        href: "/fonts/manrope-latin-wght-normal.woff2",
+        as: "font",
+        type: "font/woff2",
         crossOrigin: "anonymous",
       },
       {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap",
+        rel: "preload",
+        href: "/fonts/manrope-latin-ext-wght-normal.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: "/fonts/cormorant-garamond-latin-wght-normal.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: "/fonts/cormorant-garamond-latin-ext-wght-normal.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
@@ -127,6 +150,16 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const isAdminRoute = pathname === "/admin" || pathname.startsWith("/admin/");
+  const mainRef = useRef<HTMLElement>(null);
+  const previousPathname = useRef(pathname);
+
+  useEffect(() => {
+    if (previousPathname.current === pathname) return;
+    previousPathname.current = pathname;
+    mainRef.current?.focus({ preventScroll: true });
+  }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -136,14 +169,19 @@ function RootComponent() {
       >
         İçeriğe geç
       </a>
-      <div className="flex min-h-screen flex-col bg-background">
-        <SiteHeader />
-        <main id="main" className="flex-1 pb-20 sm:pb-0">
+      <div className={isAdminRoute ? "min-h-screen" : "flex min-h-screen flex-col bg-background"}>
+        {!isAdminRoute && <SiteHeader />}
+        <main
+          ref={mainRef}
+          id="main"
+          tabIndex={-1}
+          className={isAdminRoute ? "min-h-screen outline-none" : "flex-1 outline-none"}
+        >
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
         </main>
-        <SiteFooter />
-        <StickyBookCta />
+        {!isAdminRoute && <SiteFooter />}
+        {!isAdminRoute && <StickyBookCta />}
       </div>
     </QueryClientProvider>
   );

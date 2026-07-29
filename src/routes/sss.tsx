@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { Section, SectionHeading } from "@/components/site/Layout";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
-import { faqItems } from "@/lib/content";
+import { faqItems, IS_PLACEHOLDER_CONTENT } from "@/lib/content";
 import { Input } from "@/components/ui/input";
 
 const title = "Sık Sorulan Sorular | Hazel Ağaoğlu Nail Art Studio";
@@ -18,20 +18,22 @@ export const Route = createFileRoute("/sss")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
     ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqItems.map((f) => ({
-            "@type": "Question",
-            name: f.question,
-            acceptedAnswer: { "@type": "Answer", text: f.answer },
-          })),
-        }),
-      },
-    ],
+    scripts: IS_PLACEHOLDER_CONTENT
+      ? []
+      : [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faqItems.map((f) => ({
+                "@type": "Question",
+                name: f.question,
+                acceptedAnswer: { "@type": "Answer", text: f.answer },
+              })),
+            }),
+          },
+        ],
   }),
   component: FaqPage,
 });
@@ -53,7 +55,7 @@ function FaqPage() {
         as="h1"
         eyebrow="S.S.S."
         title="Sık sorulan sorular"
-        description="Aradığın yanıt burada yoksa iletişim sayfasından bize yazabilirsin."
+        description="Yanıtlar taslaktır; Hazel'in çalışma düzeni ve politikaları onaylandığında güncellenecektir."
       />
 
       <div className="mt-8 max-w-md">
@@ -69,6 +71,10 @@ function FaqPage() {
           className="h-12 rounded-full"
         />
       </div>
+
+      <p role="status" aria-live="polite" className="sr-only">
+        {filtered.length} soru gösteriliyor.
+      </p>
 
       <div className="mt-8 max-w-3xl">
         <FaqAccordion items={filtered} />

@@ -1,19 +1,26 @@
-import { createStart, createCsrfMiddleware, createMiddleware } from "@tanstack/react-start";
+import { createCsrfMiddleware, createMiddleware, createStart } from "@tanstack/react-start";
 
-import { renderErrorPage } from "./lib/error-page";
+import { getRequestId, isExpectedHttpError, logServerError } from "./lib/error-capture";
+import { createErrorResponse } from "./lib/error-page";
 
-const errorMiddleware = createMiddleware().server(async ({ next }) => {
+const errorMiddleware = createMiddleware().server(async ({ next, request }) => {
   try {
     return await next();
   } catch (error) {
-    if (error != null && typeof error === "object" && "statusCode" in error) {
+    // Redirects and intentional 4xx responses are part of normal router
+    // control flow and must retain their original status and headers.
+    if (isExpectedHttpError(error)) {
       throw error;
     }
-    console.error(error);
-    return new Response(renderErrorPage(), {
-      status: 500,
-      headers: { "content-type": "text/html; charset=utf-8" },
+
+    const requestId = getRequestId(request);
+    logServerError({
+      error,
+      operation: "request.middleware",
+      request,
+      requestId,
     });
+    return createErrorResponse(requestId);
   }
 });
 
