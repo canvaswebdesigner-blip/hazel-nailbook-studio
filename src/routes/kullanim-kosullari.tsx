@@ -4,7 +4,7 @@ import { Section, SectionHeading, PlaceholderNote } from "@/components/site/Layo
 
 const title = "Kullanım Koşulları | Hazel Ağaoğlu Nail Art Studio";
 const description =
-  "Web sitesinin ve online randevu sisteminin kullanımına ilişkin koşullar.";
+  "İşletme onayıyla kesinleşecek web sitesi ve online randevu kullanım koşulları taslağı.";
 
 export const Route = createFileRoute("/kullanim-kosullari")({
   head: () => ({
@@ -22,41 +22,42 @@ function TermsPage() {
   return (
     <Section>
       <SectionHeading as="h1" eyebrow="Yasal" title="Kullanım Koşulları" />
+      <PlaceholderNote>
+        Bu sayfa yürürlükte olan kullanım koşulları değildir. Gerçek işletme bilgileri, hizmet
+        kuralları ve hukuki metinler onaylandıktan sonra yayımlanacaktır.
+      </PlaceholderNote>
       <div className="mt-8 max-w-3xl space-y-6 text-sm leading-relaxed text-muted-foreground">
         <section>
-          <h2 className="text-lg text-foreground">Sitenin kullanımı</h2>
+          <h2 className="text-lg text-foreground">Sitenin amacı</h2>
           <p className="mt-2">
-            Bu site, stüdyo hizmetleri hakkında bilgi vermek ve online randevu
-            oluşturmayı sağlamak amacıyla sunulur. Siteyi kullanarak bu
-            koşulları kabul etmiş olursun.
+            Site hizmetleri, tahmini süreleri ve müsaitliği göstermeyi; uygun bir saat seçildiğinde
+            online randevu oluşturmayı amaçlar. Randevu yalnızca sunucu onayı ve randevu kodu
+            üretildikten sonra kesinleşir.
           </p>
         </section>
         <section>
-          <h2 className="text-lg text-foreground">Randevu bilgileri</h2>
+          <h2 className="text-lg text-foreground">Randevu kullanımı</h2>
           <p className="mt-2">
-            Randevu oluştururken verdiğin bilgilerin doğru olması gerekir.
-            Hatalı iletişim bilgisi nedeniyle ulaşılamayan randevularda
-            hatırlatma gönderilemeyebilir.
+            Kullanıcı sorumlulukları, iptal ve değişiklik süreleri işletme tarafından onaylanmış
+            güncel randevu koşullarında açıklanmalıdır. Bu metin yayımlanmadan production randevusu
+            kabul edilmemelidir.
           </p>
         </section>
         <section>
-          <h2 className="text-lg text-foreground">İçerik hakları</h2>
+          <h2 className="text-lg text-foreground">İçerik ve görseller</h2>
           <p className="mt-2">
-            Sitedeki görseller, metinler ve tasarım stüdyoya aittir; izinsiz
-            kullanılamaz.
+            Şu an kullanılan metinler ve görsel alanlar taslaktır. Gerçek marka içeriği ve kullanım
+            izinleri teslim öncesinde doğrulanacaktır.
           </p>
         </section>
         <section>
-          <h2 className="text-lg text-foreground">Değişiklikler</h2>
+          <h2 className="text-lg text-foreground">Nihai koşullar</h2>
           <p className="mt-2">
-            Hizmet kapsamı, fiyatlar ve bu koşullar önceden bildirilmeksizin
-            güncellenebilir.
+            Yürürlük tarihi, işletme kimliği ve güncelleme yöntemi nihai koşullarda açıkça
+            belirtilecektir.
           </p>
         </section>
       </div>
-      <PlaceholderNote>
-        Bu metin taslaktır ve yayına alınmadan önce güncellenecektir.
-      </PlaceholderNote>
     </Section>
   );
 }

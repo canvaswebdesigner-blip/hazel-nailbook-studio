@@ -3,8 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Section, SectionHeading, PlaceholderNote } from "@/components/site/Layout";
 
 const title = "Gizlilik Politikası | Hazel Ağaoğlu Nail Art Studio";
-const description =
-  "Randevu sırasında paylaştığın kişisel verilerin nasıl işlendiği, saklandığı ve korunduğu hakkında bilgi.";
+const description = "İşletme ve hukuk onayıyla kesinleşecek kişisel veri işleme yaklaşımı taslağı.";
 
 export const Route = createFileRoute("/gizlilik")({
   head: () => ({
@@ -22,43 +21,43 @@ function PrivacyPage() {
   return (
     <Section>
       <SectionHeading as="h1" eyebrow="Yasal" title="Gizlilik Politikası" />
+      <PlaceholderNote>
+        Bu metin yürürlükte bir gizlilik politikası değildir. Veri sorumlusu, sağlayıcılar, işleme
+        amaçları ve saklama süreleri işletme ve hukuk onayıyla tamamlanmadan formlar production
+        ortamında etkinleştirilmemelidir.
+      </PlaceholderNote>
       <div className="mt-8 max-w-3xl space-y-6 text-sm leading-relaxed text-muted-foreground">
         <section>
-          <h2 className="text-lg text-foreground">Hangi verileri topluyoruz?</h2>
+          <h2 className="text-lg text-foreground">Güvenli çalışma sınırı</h2>
           <p className="mt-2">
-            Randevu oluştururken adın, iletişim bilgin ve seçtiğin hizmet
-            bilgisi kaydedilir. Bu veriler yalnızca randevunun planlanması ve
-            hatırlatılması için kullanılır.
+            Online randevu ve iletişim formu, yalnızca güncel bir gizlilik bildirimi veritabanında
+            yayımlandığında veri kabul eder. Bildirim eksik veya güncel değilse işlem güvenli
+            biçimde reddedilir.
           </p>
         </section>
         <section>
-          <h2 className="text-lg text-foreground">Verilerin saklanması</h2>
+          <h2 className="text-lg text-foreground">Toplanabilecek bilgiler</h2>
           <p className="mt-2">
-            Kayıtlar güvenli bir veritabanında tutulur ve yalnızca yetkili
-            stüdyo hesabı tarafından görüntülenebilir. Randevu geçmişi, yasal
-            saklama süresi boyunca korunur.
+            Randevu için ad, telefon, isteğe bağlı e-posta ve not; genel iletişim için ad, telefon
+            veya e-posta ve mesaj alınabilir. Hangi verinin hangi amaçla işlendiği ve ne kadar
+            saklandığı nihai politikada açıkça belirtilecektir.
           </p>
         </section>
         <section>
-          <h2 className="text-lg text-foreground">Üçüncü taraflarla paylaşım</h2>
+          <h2 className="text-lg text-foreground">Sağlayıcılar ve saklama</h2>
           <p className="mt-2">
-            Kişisel verilerin pazarlama amacıyla üçüncü taraflarla paylaşılmaz
-            veya satılmaz.
+            Veritabanı, barındırma, e-posta veya mesajlaşma sağlayıcıları kesinleşmeden üçüncü taraf
+            paylaşımı ya da saklama süresi hakkında kesin bir taahhüt verilmeyecektir.
           </p>
         </section>
         <section>
-          <h2 className="text-lg text-foreground">Haklarınız</h2>
+          <h2 className="text-lg text-foreground">Başvuru ve haklar</h2>
           <p className="mt-2">
-            Verilerine erişme, düzeltilmesini veya silinmesini talep etme
-            hakkına sahipsin. Bu talepler için iletişim sayfasındaki kanallardan
-            bize ulaşabilirsin.
+            Veri sorumlusu bilgileri ve başvuru kanalı, gerçek işletme iletişim bilgileri
+            onaylandığında bu sayfaya eklenecektir.
           </p>
         </section>
       </div>
-      <PlaceholderNote>
-        Bu metin taslaktır ve hukuki danışmanlık yerine geçmez; yayına
-        alınmadan önce güncellenecektir.
-      </PlaceholderNote>
     </Section>
   );
 }

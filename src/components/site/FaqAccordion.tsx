@@ -19,9 +19,7 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
     <Accordion type="single" collapsible className="w-full">
       {items.map((item) => (
         <AccordionItem key={item.id} value={item.id}>
-          <AccordionTrigger className="text-left text-base">
-            {item.question}
-          </AccordionTrigger>
+          <AccordionTrigger className="text-left text-base">{item.question}</AccordionTrigger>
           <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
             {item.answer}
           </AccordionContent>

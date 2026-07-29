@@ -1,29 +1,85 @@
-# Welcome to your Lovable project
+# Hazel Ağaoğlu Nail Art Studio
 
-This project was built with [Lovable](https://lovable.dev).
+Hazel Ağaoğlu Nail Art Studio için geliştirilen Türkçe, mobil öncelikli web
+sitesi ve randevu ürünü.
 
-## Build with Lovable
+Proje Lovable ile bağlantılıdır. GitHub'a gönderilen commit'ler Lovable
+editörüne de yansır. Yayınlanmış geçmişi force-push, rebase, amend veya squash
+ile yeniden yazmayın.
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+## Gereksinimler
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- [Bun 1.3.14](https://bun.sh/)
+- Git
+- Veritabanı geliştirme ve testleri için Docker Desktop
 
-## Development
+Bağımlılıklar yalnızca `bun.lock` üzerinden kurulmalıdır. npm, pnpm veya yarn
+lockfile'ı eklemeyin.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Yerel geliştirme
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+git clone https://github.com/canvaswebdesigner-blip/hazel-nailbook-studio.git
+cd hazel-nailbook-studio
+bun install --frozen-lockfile
+bun run dev
 ```
 
-## Built with
+Vite geliştirme sunucusunun terminalde gösterdiği yerel adresi açın.
+
+## Kalite kontrolleri
+
+```sh
+bun run format:check
+bun run lint
+bun run typecheck
+bun run build
+```
+
+Tüm kontrolleri sırayla çalıştırmak için:
+
+```sh
+bun run check
+```
+
+`format:check` dosya yazmaz. Biçimlendirmeyi bilinçli olarak uygulamak için
+`bun run format` kullanılabilir.
+
+## Yerel veritabanı
+
+Supabase CLI proje bağımlılığı olarak sabitlenmiştir. Docker çalışırken:
+
+```sh
+bun run db:start
+bun run check:db
+bun run db:stop
+```
+
+`check:db`, veritabanını migration'lardan temiz biçimde kurar; public/private
+şemaları lint eder ve `supabase/tests/database` altındaki pgTAP testlerini
+çalıştırır. Bu kontroller frontend `check` komutundan ayrıdır; CI'da iki iş
+paralel çalışır.
+
+Migration, erişim ve admin bootstrap ayrıntıları için
+[`docs/database/README.md`](docs/database/README.md) dosyasına bakın.
+
+Güncel doğrulama sınırları ve production teslim engelleri için
+[`docs/delivery-readiness.md`](docs/delivery-readiness.md) dosyasına bakın.
+
+## Temel teknoloji
 
 - TanStack Start
-- TypeScript
 - React
+- TypeScript
 - Tailwind CSS
+- shadcn/ui
+- Supabase PostgreSQL, Auth ve Storage
+
+## Ortam ve veri güvenliği
+
+- Gerçek müşteri verisini yerel veya preview ortamlarında kullanmayın.
+- Gizli değerleri `.env` dosyalarında tutun; bunları Git'e göndermeyin.
+- Tarayıcıya aktarılmaması gereken hiçbir sırrı `VITE_` önekiyle tanımlamayın.
+
+Production ortamı, veritabanı migration'ları ve gerekli gizli değerler ayrıca
+yapılandırılmadan proje teslim edilmiş sayılmaz.

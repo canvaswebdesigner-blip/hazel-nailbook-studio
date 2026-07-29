@@ -1,30 +1,43 @@
+const ERROR_PAGE_CSP = [
+  "default-src 'none'",
+  "base-uri 'none'",
+  "object-src 'none'",
+  "frame-ancestors 'none'",
+  "form-action 'self'",
+].join("; ");
+
 export function renderErrorPage(): string {
   return `<!doctype html>
-<html lang="en">
+<html lang="tr">
   <head>
     <meta charset="utf-8" />
-    <title>This page didn't load</title>
+    <title>Sayfa yüklenemedi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      body { font: 15px/1.5 system-ui, -apple-system, sans-serif; background: #fafafa; color: #111; display: grid; place-items: center; min-height: 100vh; margin: 0; padding: 1.5rem; }
-      .card { max-width: 28rem; width: 100%; text-align: center; padding: 2rem; }
-      h1 { font-size: 1.25rem; margin: 0 0 0.5rem; }
-      p { color: #4b5563; margin: 0 0 1.5rem; }
-      .actions { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
-      a, button { padding: 0.5rem 1rem; border-radius: 0.375rem; font: inherit; cursor: pointer; text-decoration: none; border: 1px solid transparent; }
-      .primary { background: #111; color: #fff; }
-      .secondary { background: #fff; color: #111; border-color: #d1d5db; }
-    </style>
+    <meta name="robots" content="noindex,nofollow" />
   </head>
   <body>
-    <div class="card">
-      <h1>This page didn't load</h1>
-      <p>Something went wrong on our end. You can try refreshing or head back home.</p>
-      <div class="actions">
-        <button class="primary" onclick="location.reload()">Try again</button>
-        <a class="secondary" href="/">Go home</a>
-      </div>
-    </div>
+    <main>
+      <h1>Sayfa yüklenemedi</h1>
+      <p>Beklenmeyen bir sorun oluştu. Sayfayı tekrar deneyebilir veya ana sayfaya dönebilirsin.</p>
+      <form method="get">
+        <button type="submit">Tekrar dene</button>
+      </form>
+      <p><a href="/">Ana sayfaya dön</a></p>
+    </main>
   </body>
 </html>`;
+}
+
+export function createErrorResponse(requestId: string): Response {
+  return new Response(renderErrorPage(), {
+    status: 500,
+    headers: {
+      "cache-control": "private, no-store, max-age=0",
+      "content-security-policy": ERROR_PAGE_CSP,
+      "content-type": "text/html; charset=utf-8",
+      "referrer-policy": "no-referrer",
+      "x-request-id": requestId,
+      "x-robots-tag": "noindex, nofollow",
+    },
+  });
 }

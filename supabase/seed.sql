@@ -1,0 +1,5 @@
+-- Intentionally empty.
+--
+-- Real customer or business data must never be committed here. Local-only
+-- fixtures should use clearly fictional names and remain separate from schema
+-- migrations.

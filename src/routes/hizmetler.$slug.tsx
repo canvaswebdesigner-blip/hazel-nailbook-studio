@@ -1,8 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
-import { Section } from "@/components/site/Layout";
-import { formatDuration, formatPrice } from "@/components/site/ServiceCard";
-import { serviceCategories, services } from "@/lib/content";
+import { PlaceholderNote, Section } from "@/components/site/Layout";
+import { IS_PLACEHOLDER_CONTENT, serviceCategories, services } from "@/lib/content";
+import { formatDuration, formatPrice } from "@/lib/service-format";
 
 export const Route = createFileRoute("/hizmetler/$slug")({
   loader: ({ params }) => {
@@ -38,9 +38,7 @@ function ServiceNotFound() {
   return (
     <Section>
       <h1 className="text-3xl">Bu hizmeti bulamadık</h1>
-      <p className="mt-3 text-muted-foreground">
-        Aradığın hizmet kaldırılmış olabilir.
-      </p>
+      <p className="mt-3 text-muted-foreground">Aradığın hizmet kaldırılmış olabilir.</p>
       <Link
         to="/hizmetler"
         className="mt-6 inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground"
@@ -93,7 +91,7 @@ function ServiceDetailPage() {
                     <Link
                       to="/hizmetler/$slug"
                       params={{ slug: r.slug }}
-                      className="inline-flex h-10 items-center rounded-full border border-border px-4 text-sm hover:bg-muted"
+                      className="inline-flex h-11 items-center rounded-full border border-border px-4 text-sm hover:bg-muted"
                     >
                       {r.name}
                     </Link>
@@ -112,9 +110,7 @@ function ServiceDetailPage() {
             </div>
             <div>
               <dt className="eyebrow">Tahmini süre</dt>
-              <dd className="mt-1 text-lg">
-                {formatDuration(service.durationMinutes)}
-              </dd>
+              <dd className="mt-1 text-lg">{formatDuration(service.durationMinutes)}</dd>
             </div>
           </dl>
           <Link
@@ -122,11 +118,16 @@ function ServiceDetailPage() {
             search={{ hizmet: service.slug }}
             className="mt-6 flex h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
           >
-            Bu hizmet için randevu al
+            {IS_PLACEHOLDER_CONTENT ? "Randevu ekranında incele" : "Bu hizmet için randevu al"}
           </Link>
           <p className="mt-3 text-xs text-muted-foreground">
             Fiyat ve süre tırnak yapına göre değişebilir.
           </p>
+          {IS_PLACEHOLDER_CONTENT ? (
+            <PlaceholderNote>
+              Hizmet içeriği, süre ve fiyat işletme tarafından henüz onaylanmadı.
+            </PlaceholderNote>
+          ) : null}
         </aside>
       </div>
     </Section>

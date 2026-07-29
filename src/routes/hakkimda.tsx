@@ -29,35 +29,32 @@ function AboutPage() {
             eyebrow="Hakkımda"
             title="Sakin bir atölye, kişiye özel bir yaklaşım"
           />
+          <PlaceholderNote>
+            Bu sayfadaki anlatım taslaktır; Hazel tarafından onaylanmadan marka hikâyesi olarak
+            yayımlanmayacaktır.
+          </PlaceholderNote>
           <div className="mt-8 space-y-5 text-base leading-relaxed text-muted-foreground">
             <p>
-              {business.shortName}, tırnak bakımını aceleye getirmeden, tek
-              müşteriye odaklanarak çalışan küçük bir stüdyo anlayışıyla
-              kuruldu. Amacım, her randevunun hem bakım hem de dinlenme anı
-              olması.
+              Önerilen marka anlatımı, {business.shortName} için sakin, tek müşteriye odaklanan
+              butik bir stüdyo yaklaşımı kuruyor. Bu yön Hazel'in onayıyla kesinleştirilecek.
             </p>
             <p>
-              Her uygulamada önce tırnak yapını değerlendiriyor, sonra sana
-              uygun form, renk ve bakım planını birlikte belirliyoruz. Trend
-              olan her şeyi değil, sana yakışanı öneriyorum.
+              Taslak içerik; tırnak yapısına, istenen forma ve tasarım tercihine göre kişisel
+              planlama fikrini öne çıkarıyor. Gerçek uygulama adımları doğrulanmadan kesin bir süreç
+              olarak sunulmayacak.
             </p>
             <p>
-              Kullanılan ürünlerde kalite ve tırnak sağlığı önceliğim. Hijyen
-              kurallarını şeffaf biçimde paylaşıyorum; merak ettiğin her adımı
-              uygulama sırasında sorabilirsin.
+              Ürün seçimi, bakım yaklaşımı ve hijyen kuralları hakkında kullanılacak nihai ifadeler
+              Hazel'in gerçek çalışma düzeni ve onayıyla hazırlanacak.
             </p>
           </div>
 
           <Link
-            to="/randevu"
+            to="/hizmetler"
             className="mt-10 inline-flex h-12 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
           >
-            Randevu Al
+            Hizmetleri İncele
           </Link>
-
-          <PlaceholderNote>
-            Bu metin taslaktır; nihai içerik onaylandığında güncellenecek.
-          </PlaceholderNote>
         </div>
 
         <div>

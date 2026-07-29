@@ -12,8 +12,7 @@ export const business = {
   name: "Hazel Ağaoğlu Nail Art Studio",
   shortName: "Hazel Ağaoğlu",
   tagline: "Güzellik detaylarda saklı.",
-  promise:
-    "Hizmetini seç, uygun saatini gör ve randevunu birkaç adımda oluştur.",
+  promise: "Hizmetleri, süreleri ve stüdyo detaylarını tek yerde incele.",
   /** PLACEHOLDER */
   address: "Buca, İzmir (adres bilgisi yakında eklenecek)",
   /** PLACEHOLDER */
@@ -190,14 +189,14 @@ export const faqItems: FaqItem[] = [
     id: "f1",
     question: "Randevu almadan gelebilir miyim?",
     answer:
-      "Stüdyo randevu ile çalışıyor. Online randevu ekranından uygun saatleri görebilir ve mesaj beklemeden yerini ayırtabilirsin.",
+      "Randevusuz kabul kuralı işletme tarafından henüz onaylanmadı. Uygun bir saati garanti etmek için online takvimden randevu oluşturman önerilir.",
     category: "randevu",
   },
   {
     id: "f2",
     question: "Randevumu nasıl iptal ederim veya değiştiririm?",
     answer:
-      "Randevunu oluşturduğunda sana özel bir randevu bağlantısı verilir. Bu bağlantıdan randevunu görüntüleyebilir, iptal edebilir veya erteleyebilirsin.",
+      "Randevu onayından sonra verilen özel yönetim bağlantısını kullanabilirsin. Sistem, işlem sırasında işletmenin güncel iptal ve değişiklik süresini uygular.",
     category: "randevu",
   },
   {
@@ -211,21 +210,21 @@ export const faqItems: FaqItem[] = [
     id: "f4",
     question: "Kalıcı oje tırnağa zarar verir mi?",
     answer:
-      "Doğru uygulama ve doğru söküm ile tırnak yapısı korunur. Kendi kendine sökmek yerine randevu ile söküm yaptırman önerilir.",
+      "Her tırnağın durumu farklıdır. Uygun işlem ve söküm yaklaşımı Hazel tarafından onaylandıktan sonra bu bölüm bilgilendirme amacıyla güncellenecek; kişisel bir sağlık değerlendirmesinin yerini tutmayacaktır.",
     category: "bakim",
   },
   {
     id: "f5",
     question: "Hijyen konusunda nasıl bir yol izliyorsunuz?",
     answer:
-      "Tek kullanımlık malzemeler her müşteri için yenilenir, tekrar kullanılan metal aletler ise uygulama arasında temizlenip dezenfekte edilir.",
+      "Planlanan hijyen başlıkları tek kullanımlık malzemeler, tekrar kullanılan aletlerin temizliği ve çalışma alanı düzenidir. Kesin uygulamalar Hazel tarafından doğrulandıktan sonra yayımlanacaktır.",
     category: "hijyen",
   },
   {
     id: "f6",
     question: "Ne kadar önceden randevu almalıyım?",
     answer:
-      "Yoğunluk dönemsel olarak değişiyor. En yakın uygun saatleri randevu ekranında canlı olarak görebilirsin.",
+      "Randevu ekranı işletmenin güncel minimum hazırlık süresini ve ileri tarih sınırını otomatik uygular. Kesin süreler işletme tarafından yayın öncesinde onaylanacaktır.",
     category: "randevu",
   },
 ];
@@ -240,15 +239,15 @@ export const bookingSteps = [
   },
   {
     title: "Uygun saati gör",
-    text: "Gerçek takvim üzerinden boş saatleri anında görüntüle.",
+    text: "Gerçek takvim üzerinden seçtiğin hizmete uygun boş saatleri görüntüle.",
   },
   {
     title: "Bilgilerini bırak",
-    text: "İsim ve iletişim bilgin yeterli; hesap oluşturmana gerek yok.",
+    text: "Hesap oluşturmadan gerekli iletişim bilgilerini ve isteğe bağlı notunu gir.",
   },
   {
     title: "Randevun hazır",
-    text: "Randevu özetini ve sana özel yönetim bağlantısını hemen al.",
+    text: "Onaydan sonra randevu özetini ve özel yönetim bağlantını al.",
   },
 ];
 
